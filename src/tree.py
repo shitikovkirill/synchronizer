@@ -1,11 +1,11 @@
-
 from pathlib import Path
 
 from .directory import Dir
 from .file import File
 
+
 def tree_builder(root_path: Path):
-    
+
     if root_path.is_dir():
         root_dir = Dir(root_path)
         dirs = root_path.iterdir()

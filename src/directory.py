@@ -7,7 +7,7 @@ class Dir:
     def __init__(self, path: Path):
         self.path = path
         self.inner = set()
-            
+
     def __eq__(self, other: Self):
         return self.path == other.path
 

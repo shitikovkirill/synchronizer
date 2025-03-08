@@ -9,7 +9,7 @@ class File:
         with open(path, "rb") as f:
             file_hash = hashlib.sha256(f.read()).hexdigest()
             self._hash = file_hash
-            
+
     def __eq__(self, other: Self):
         return (self.path, self._hash) == (other.path, other._hash)
 
