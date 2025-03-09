@@ -4,11 +4,11 @@ from pathlib import Path
 
 import pytest
 
-from src.nodes import File
+from sync.nodes import File
 
 
 class TestFile:
-    file_path = Path("./test/test_hash.txt")
+    file_path = Path("./tests/test_hash.txt")
 
     @pytest.fixture(autouse=True)
     def work_with_test_file(self):

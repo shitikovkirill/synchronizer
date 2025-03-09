@@ -2,11 +2,11 @@ from pathlib import Path
 
 import pytest
 
-from src.nodes import Dir
+from sync.nodes import Dir
 
 
 class Testdir:
-    dir_path = Path("./test/test_dir")
+    dir_path = Path("./tests/test_dir")
 
     @pytest.fixture(autouse=True)
     def work_with_test_dir(self):

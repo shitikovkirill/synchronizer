@@ -1,7 +1,7 @@
 import hashlib
 import re
 from pathlib import Path
-from typing import Self
+from typing import DefaultDict, Self
 from abc import ABC, abstractmethod
 
 
@@ -23,8 +23,10 @@ class Node(ABC):
 
 
 class Dir(Node):
-    def __init__(self, path: Path):
+    def __init__(self, path: Path, parrent: Self | None = None):
         self.path = path
+        self.abs_path = path.absolute()
+        self.parrent = parrent
         self.inner = set()
 
     def __eq__(self, other: Self):
@@ -41,10 +43,21 @@ class Dir(Node):
             result = re.subn(r"(^|\n)", "\n-- ", "\n".join(data))[0]
         return result or "\n".join(data)
 
+    def get_all_nodes(self):
+        nodes = set([self])
+        for item in self.inner:
+            if isinstance(item, Dir):
+                nodes.update(item.get_all_nodes())
+            else:
+                nodes.add(item)
+        return nodes
+
 
 class File(Node):
-    def __init__(self, path: Path):
+    def __init__(self, path: Path, parrent: Dir | None = None):
         self.path = path
+        self.abs_path = path.absolute()
+        self.parrent = parrent
         with open(path, "rb") as f:
             file_hash = hashlib.sha256(f.read()).hexdigest()
             self._hash = file_hash
@@ -58,3 +71,11 @@ class File(Node):
     def __str__(self):
         data = [f"{self.__class__.__name__}: {self.path}"]
         return "\n".join(data)
+
+
+class FileStorage(DefaultDict):
+    def __init__(self):
+        self.storage: DefaultDict[str, list] = DefaultDict(list)
+
+    def clear(self):
+        self.storage.clear()
