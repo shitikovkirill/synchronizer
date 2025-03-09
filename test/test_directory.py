@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from src.directory import Dir
+from src.nodes import Dir
 
 
 class Testdir:

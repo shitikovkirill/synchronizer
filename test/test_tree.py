@@ -18,8 +18,4 @@ class TestTree:
 
     def test_multi_tree(self):
         tree = tree_builder(Path("./test/dirs/multi"))
-        assert (
-            str(tree)
-            == """
-"""
-        )
+        assert str(tree) == ""

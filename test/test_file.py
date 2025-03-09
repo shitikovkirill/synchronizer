@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from src.file import File
+from src.nodes import File
 
 
 class TestFile:

@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from .directory import Dir
-from .file import File
+from .nodes import Dir
+from .nodes import File
 
 
 def tree_builder(root_path: Path):
