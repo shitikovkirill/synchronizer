@@ -2,7 +2,6 @@ from collections import defaultdict
 import logging
 import os
 from pathlib import Path
-import sys
 
 from sync.planner import get_tree_diff, Syncronizer
 from sync.tree import TreeBuilder
@@ -11,23 +10,7 @@ from sync.tree import TreeBuilder
 logger = logging.getLogger(__name__)
 
 
-def set_logger():
-    format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-    logging.basicConfig(filename="logs.log", level=logging.DEBUG, format=format)
-    root = logging.getLogger()
-    root.setLevel(logging.DEBUG)
-
-    handler = logging.StreamHandler(sys.stdout)
-    handler.setLevel(logging.DEBUG)
-    formatter = logging.Formatter(format)
-    handler.setFormatter(formatter)
-    root.addHandler(handler)
-
-
 def run(sourse: Path, replica: Path):
-    set_logger()
-    replica.mkdir(parents=True, exist_ok=True)
-    abs_pass = replica.absolute()
 
     logger.info("Build sourse tree")
     sourse_file_store = defaultdict(set)
@@ -42,7 +25,7 @@ def run(sourse: Path, replica: Path):
     replica_file_store = defaultdict(set)
     builder = TreeBuilder(replica_file_store)
 
-    os.chdir(abs_pass)
+    os.chdir(replica)
     replica_tree = builder.build(Path("."))
     logger.debug(replica_tree)
 
