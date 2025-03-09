@@ -23,4 +23,4 @@ class TestTree:
     def test_multi_tree(self):
         builder = TreeBuilder(defaultdict(set))
         tree = builder.build(Path("./tests/dirs/multi"))
-        assert str(tree) == ""
+        assert "tests/dirs/multi/1" in str(tree)

@@ -46,6 +46,9 @@ class TowNodeAction(Action, ABC):
         self.node = node
         self.to = to
 
+    def __str__(self):
+        return f"{self.__class__.__name__}: from={repr(self.node)} to={repr(self.to)}"
+
     def __repr__(self):
         return f"{self.__class__.__name__}(from={repr(self.node)}, to={repr(self.to)})"
 
