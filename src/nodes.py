@@ -17,7 +17,7 @@ class Node(ABC):
     @abstractmethod
     def __str__(self):
         pass
-    
+
     def __repr__(self):
         return f"{self.__class__.__name__}({repr(self.path)})"
 

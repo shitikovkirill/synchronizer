@@ -1,24 +1,5 @@
-from typing import Type
-from .nodes import Node, Dir
-from abc import ABC
-
-
-class Action(ABC):
-    def __str__(self):
-        return f"{self.__class__.__name__}: {self.node}"
-
-    def __repr__(self):
-        return f"{self.__class__.__name__}({repr(self.node)})"
-
-
-class Remove(Action):
-    def __init__(self, node: Type[Node]):
-        self.node = node
-
-
-class Copy(Action):
-    def __init__(self, node: Type[Node]):
-        self.node = node
+from .actions import Copy, Remove
+from .nodes import Dir
 
 
 def _get_only_dir(nodes: set):
