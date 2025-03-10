@@ -24,9 +24,12 @@ class SingleNodeAction(Action, ABC):
 
 class Remove(SingleNodeAction):
     def __call__(self):
+        if not self.node.path.exists():
+            return
+
         if isinstance(self.node, Dir):
-            self.node.path.rmdir()
-        elif self.node.path.exists():
+            shutil.rmtree(self.node.path)
+        else:
             self.node.path.unlink()
 
 
@@ -34,6 +37,8 @@ class Create(SingleNodeAction):
     def __call__(self):
         if isinstance(self.node, Dir):
             self.node.path.mkdir(parents=True, exist_ok=True)
+        else:
+            raise NotImplementedError(f"Creation not implemented for this type {type(self.node)}")
 
 
 class TowNodeAction(Action, ABC):
