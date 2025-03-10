@@ -8,6 +8,7 @@
 ### Run
 
 ```bash
+mkdir source
 python3.11 cli.py source replica --log_name logs.log -i 10
 ```
 
