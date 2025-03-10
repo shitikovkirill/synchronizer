@@ -36,11 +36,6 @@ class Create(SingleNodeAction):
             self.node.path.mkdir(parents=True, exist_ok=True)
 
 
-class Copy(SingleNodeAction):
-    def __call__(self):
-        shutil.copy(self.node.abs_path, self.node.path)
-
-
 class TowNodeAction(Action, ABC):
     def __init__(self, node: Type[Node], to: Type[Node]):
         self.node = node
@@ -51,6 +46,14 @@ class TowNodeAction(Action, ABC):
 
     def __repr__(self):
         return f"{self.__class__.__name__}(from={repr(self.node)}, to={repr(self.to)})"
+
+
+class Copy(TowNodeAction):
+    def __init__(self, node: Type[Node], to: Type[Node] | None = None):
+        super().__init__(node, to or node)
+
+    def __call__(self):
+        shutil.copy(self.node.abs_path, self.to.path)
 
 
 class Move(TowNodeAction):

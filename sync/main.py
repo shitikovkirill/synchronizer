@@ -37,7 +37,7 @@ def run(sourse: Path, replica: Path):
     logger.info("Run preparing plan")
     syncr = Syncronizer(sourse_file_store, replica_file_store)
     plan = syncr.plan(*diff)
-    logger.debug(f"Sincronisation plan: {diff[1]}")
+    logger.debug(f"Sincronisation plan: {plan}")
 
     for cmd in plan:
         logger.info(f"Run command {cmd}")

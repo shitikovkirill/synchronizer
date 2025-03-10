@@ -36,11 +36,11 @@ class Dir(Node):
         return hash(self.path)
 
     def __str__(self):
-        data = [f"{self.__class__.__name__}: {self.path}"]
-        result = None
+        data = []
+        result = f"{self.__class__.__name__}: {self.path}"
         for item in self.inner:
             data.append(str(item))
-            result = re.subn(r"(^|\n)", "\n-- ", "\n".join(data))[0]
+            result += re.subn(r"(^|\n)", "\n-- ", "\n".join(data))[0]
         return result or "\n".join(data)
 
     def get_all_nodes(self):

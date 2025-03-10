@@ -15,8 +15,7 @@ class TestTree:
         tree = builder.build(Path("./tests/dirs/simple"))
         assert (
             str(tree)
-            == """
--- Dir: tests/dirs/simple
+            == """Dir: tests/dirs/simple
 -- File: tests/dirs/simple/test.txt"""
         )
 
